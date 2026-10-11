@@ -184,3 +184,5 @@ Claude Opus 5.5 and Sonnet 5.5 models are used for coding, debugging, and docume
 - **Team:** Bountum. 
 - **Member:** Kerem Yurtseven.
 - **Demo video:** link added at submission.
+
+**This effort is supported by Qollab & IonQ**
