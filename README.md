@@ -150,7 +150,7 @@ Details are in [docs/technical_notes.md](docs/technical_notes.md).
 
 ## Run it
 
-**On Qollab:** open the project and run `main.py`. It runs in the browser and took 69.8 s on Qollab (`results/qollab_run.txt`). The demo has three parts:
+**On Qollab:** open the project and run `main.py`. It runs in the browser and took 69 s on Qollab (`results/qollab_run.txt`). The demo has three parts:
 1. **The 16-qubit benchmark on the main night:** the classical baselines next to both QAOA encodings.
 2. **The depot:** one night, a 30-night run, and QAOA as the subsolver in a 16-bus depot.
 3. **An optional hardware run:** if you choose an IonQ backend in Qollab's *Select QPU* dialog, the trained circuit also runs there once. The quantum-computer entries use Qollab credits; the IonQ remote simulators are free.
