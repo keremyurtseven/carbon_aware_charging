@@ -1,62 +1,164 @@
 Console output of `main.py` on Qollab (browser runtime, Pyodide), run by the team on Sun Oct 11, 2026.
 Copied verbatim from the Qollab console. Outputs were written to qollab_output/ in the browser.
 
-Loading packages…
-Loading project files…
-Compiling / initializing runtime…
-Running...
-Night 2026-10-08 20:00 -> next day 08:00, 3 EVs, 16 qubits, w = 0.7
-Block       20-22   22-00   00-02   02-04   04-06   06-08
-CO2 g/kWh     442     461     345     174     160     184
-EUR/MWh     215.7   176.2   113.7    83.4    84.3   129.4
-
-method                              kg CO2    EUR  schedule         feas  sav% vsMed% P(feas) apx.best apx.exp  P(opt)  P(<1%) depth   2q  time s
--------------------------------------------------------------------------------------------------------------------------------------------------
-on-arrival                           38.14  15.01  A:0,1 B:2 C:1,2   yes   0.0  -44.5       -        -       -       -       -     -    -    0.00
-median feasible schedule             26.39  11.79  A:1,4 B:3 C:1,5   yes  30.8    0.0       -        -       -       -       -     -    -       -
-greedy                               15.74   8.71  A:3,5 B:4 C:3,4   yes  58.7   40.3       -        -       -       -       -     -    -    0.00
-SA (QUBO)                            15.69   8.72  A:4,5 B:3 C:3,4   yes  58.9   40.5       -        -       -       -       -     -    -    0.20
-exact (MILP)                         15.69   8.72  A:4,5 B:3 C:3,4   yes  58.9   40.5       -        -       -       -       -     -    -    0.03
-random sampling, 4096 shots          18.98   8.93  A:3,4 B:2 C:3,5   yes  50.2   28.1   0.007   0.8725  0.6419  0.0000  0.0000     -    -       -
-Dicke start only (p=0), 4096 shots   15.69   8.72  A:4,5 B:3 C:3,4   yes  58.9   40.5   0.670   1.0000  0.6359  0.0007  0.0024     -    -       -
-QAOA penalty-X (p=2)                 15.69   8.72  A:4,5 B:3 C:3,4   yes  58.9   40.5   0.523   1.0000  0.6467  0.0017  0.0039    79  160   24.07
-QAOA XY (p=2)                        15.69   8.72  A:4,5 B:3 C:3,4   yes  58.9   40.5   0.697   1.0000  0.7017  0.0020  0.0068   244  206    6.63
-
-sav% = CO2 saved vs on-arrival; vsMed% = CO2 saved vs the median feasible schedule (objective 89.22, 500 feasible schedules).
-On-arrival is the do-nothing baseline; tonight it ranks 500 of 500 feasible schedules (1 = best) (the last). vsMed% compares with a typical schedule.
-QAOA / sampling rows: apx.best = best feasible sample of 4096 shots, apx.exp = expected feasible cost; seed=0; exact objective = 56.8829.
-QAOA setup: both mixers at p=2 layers, CVaR training (alpha=0.25), ramp start, maxiter 1000; p chosen so the whole demo stays under ~45 s (use --reps to change).
-<exec>:246: MatplotlibDeprecationWarning: The width parameter as float was deprecated in Matplotlib 3.10 and will be removed in 3.12. Use int(width) instead.
-<exec>:246: MatplotlibDeprecationWarning: The height parameter as float was deprecated in Matplotlib 3.10 and will be removed in 3.12. Use int(height) instead.
+Loading packages… 
+Loading project files… 
+Compiling / initializing runtime… 
+Running... 
+════════════════════════════════════════════════════════════════════════════════════════════ 
+ Carbon-aware charging for an electric bus depot 
+ Classical optimizer + QAOA in Qiskit, on real Dutch grid data  ·  Team Bountum 
+════════════════════════════════════════════════════════════════════════════════════════════ 
+ This demo runs five steps (about a minute): 
+   1  the grid data for one night 
+   2  classical baselines on a 16-qubit scheduling problem 
+   3  QAOA in Qiskit on the same problem: circuit, training, sampling 
+   4  the 100-bus depot, planned by the classical optimizer 
+   5  QAOA as the subsolver inside the depot optimizer 
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+[1/5] Grid data: night of 2026-10-08, 20:00 to 08:00 (Energy-Charts, Netherlands) 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+Carbon intensity and day-ahead price for each 2-hour block. Charging when the bars are short emits less. 
+ 
+  20-22    442 g CO2/kWh  ███████████████████████████████████·    215.7 EUR/MWh 
+  22-00    461 g CO2/kWh  ████████████████████████████████████    176.2 EUR/MWh 
+  00-02    345 g CO2/kWh  ███████████████████████████·········    113.7 EUR/MWh 
+  02-04    174 g CO2/kWh  ██████████████······················     83.4 EUR/MWh 
+  04-06    160 g CO2/kWh  ████████████························     84.3 EUR/MWh 
+  06-08    184 g CO2/kWh  ██████████████······················    129.4 EUR/MWh 
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+[2/5] Classical baselines: 3 EVs, 6 blocks, 16 yes/no decisions (16 qubits) 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+Each EV needs a set number of 2-hour blocks before it leaves, and the site limit forbids some pairs charging together. 
+There are 500 valid schedules; the exact optimum is the yardstick for QAOA. 
+ 
+  method                        kg CO2     EUR  schedule (blocks per EV)   CO2 saved 
+  charge on arrival              38.14   15.01  A:0,1 B:2 C:1,2                      
+  a typical valid schedule       26.39   11.79  A:1,4 B:3 C:1,5                30.8% 
+  greedy                         15.74    8.71  A:3,5 B:4 C:3,4                58.7% 
+  simulated annealing            15.69    8.72  A:4,5 B:3 C:3,4                58.9% 
+  exact optimum (MILP)           15.69    8.72  A:4,5 B:3 C:3,4                58.9% 
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+[3/5] QAOA in Qiskit on the same 16-qubit problem 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+Two encodings: a penalty QUBO with the standard X mixer, and an XY mixer that starts each EV in a Dicke state, 
+so every sample already gives each EV its charging blocks. The XY circuit (2 layers): 
+ 
+     ┌─────────────┐┌───────────┐┌────────┐┌───────────┐┌────────┐ 
+A_0: ┤0            ├┤0          ├┤0       ├┤0          ├┤0       ├ 
+     │             ││           ││        ││           ││        │ 
+A_1: ┤1            ├┤1          ├┤1       ├┤1          ├┤1       ├ 
+     │             ││           ││        ││           ││        │ 
+A_2: ┤2            ├┤2          ├┤2       ├┤2          ├┤2       ├ 
+     │  Dicke(6,2) ││           ││  XY β1 ││           ││  XY β2 │ 
+A_3: ┤3            ├┤3          ├┤3       ├┤3          ├┤3       ├ 
+     │             ││           ││        ││           ││        │ 
+A_4: ┤4            ├┤4          ├┤4       ├┤4          ├┤4       ├ 
+     │             ││           ││        ││           ││        │ 
+A_5: ┤5            ├┤5          ├┤5       ├┤5          ├┤5       ├ 
+     ├─────────────┤│           │├────────┤│           │├────────┤ 
+B_0: ┤0            ├┤6          ├┤0       ├┤6          ├┤0       ├ 
+     │             ││           ││        ││           ││        │ 
+B_1: ┤1            ├┤7          ├┤1       ├┤7          ├┤1       ├ 
+     │             ││   Cost γ1 ││        ││   Cost γ2 ││        │ 
+B_2: ┤2 Dicke(5,1) ├┤8          ├┤2 XY β1 ├┤8          ├┤2 XY β2 ├ 
+     │             ││           ││        ││           ││        │ 
+B_3: ┤3            ├┤9          ├┤3       ├┤9          ├┤3       ├ 
+     │             ││           ││        ││           ││        │ 
+B_4: ┤4            ├┤10         ├┤4       ├┤10         ├┤4       ├ 
+     ├─────────────┤│           │├────────┤│           │├────────┤ 
+C_0: ┤0            ├┤11         ├┤0       ├┤11         ├┤0       ├ 
+     │             ││           ││        ││           ││        │ 
+C_1: ┤1            ├┤12         ├┤1       ├┤12         ├┤1       ├ 
+     │             ││           ││        ││           ││        │ 
+C_2: ┤2 Dicke(5,2) ├┤13         ├┤2 XY β1 ├┤13         ├┤2 XY β2 ├ 
+     │             ││           ││        ││           ││        │ 
+C_3: ┤3            ├┤14         ├┤3       ├┤14         ├┤3       ├ 
+     │             ││           ││        ││           ││        │ 
+C_4: ┤4            ├┤15         ├┤4       ├┤15         ├┤4       ├ 
+     └─────────────┘└───────────┘└────────┘└───────────┘└────────┘ 
+ 
+  Training the angles (CVaR objective, alpha = 0.25; the line shows the training cost falling): 
+    penalty QAOA, X mixer █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁  1000 evaluations,  28.1 s 
+    XY QAOA               █▄▃▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁   335 evaluations,   7.5 s 
+ 
+  Sampling 4096 shots from each circuit on the statevector simulator: 
+ 
+                                          valid   near-optimal    avg quality   2-qubit 
+                                      schedules   (within 1 %)  (1 = optimal)     gates 
+  random guessing                          0.7%          0.00%           0.64           
+  XY start state only (untrained)         67.0%          0.24%           0.64           
+  penalty QAOA, X mixer                   52.3%          0.39%           0.65       160 
+  XY QAOA (Dicke start + XY mixer)        69.7%          0.68%           0.70       206 
+ 
+  XY QAOA samples near-optimal schedules 2.8x as often as its untrained start, and the average quality 
+  of its valid samples rises from 0.64 to 0.70. 
+  Its best sample is the exact optimum (A:4,5 B:3 C:3,4). With 3 layers the near-optimal rate is 39x the start 
+  (experiment e1), and the trained circuit also ran on IonQ Forte 1 hardware (see the README). 
 /project/qollab_output/main_demo.png
+
+
+
 /project/qollab_output/main_demo.png
 /project/qollab_output/main_demo.svg
+
+
+
 /project/qollab_output/main_demo.svg
-Figure alt text: `main_demo.png`: top, bar chart of carbon intensity per 2-hour block with the day-ahead price as a dashed line with markers; below, two EV-by-block grids (charge-on-arrival versus the optimal schedule) in which each EV has its own fill, hatch and marker (A blue circle, B orange crosshatched square, C green dotted triangle), white cells are available but idle and grey cells are not plugged in; the optimal schedule moves charging to the low-carbon blocks near the end of the night.
-Figure: qollab_output/main_demo.png (+ .svg); table: qollab_output/main_demo.csv
-
-Depot scale (classical MILP, 100-bus fleet modelled on public figures, 34.7 MWh this night)
-Grid connection needed:  unmanaged peak 6.90 MW | first-come-first-served cap 5.40 MW | smart schedule 3.31 MW
-(night 2026-10-08)                                  kg CO2       EUR  CO2 saved  EUR saved
-unmanaged (charge on arrival)                        13082      5046       0.0%       0.0%
-FCFS capped                                          12321      4879       5.8%       3.3%
-smart, carbon-first (w = 1), 6.90 MW                  6448      3117      50.7%      38.2%
-smart, cost-balanced (w = 0.7), 6.90 MW               6463      3120      50.6%      38.2%
-EUR = wholesale day-ahead energy; CO2 = average grid intensity. MILP proven gap 0.0020.
-(depot section: 2.1 s; table: qollab_output/main_demo_depot.csv)
-
-Depot over 30 nights (2026-09-09 to 2026-10-08), carbon-first (w = 1), same 6.90 MW connection (short version of experiments/e7_depot_year.py)
-  CO2:    508.0 t unmanaged ->   484.0 t smart  (4.7 % less)
-  EUR:    187,180 unmanaged ->   169,883 smart  (9.2 % less)
-  Full year, 362 nights: results/e7_summary.csv and README section 3.
-  (8.4 s; per-night table: qollab_output/main_demo_e7_month.csv)
-
-QAOA inside the depot optimizer: 16-bus depot, night 2026-10-08, 0.90 MW connection (short version of experiments/e8_hybrid_depot.py)
-  start (first-come-first-served) 1876 kg CO2, global optimum (MILP) 1296 kg CO2
-  exact enumeration               1321 kg CO2, closes  95.6 % of the gap, 9 subproblems,      0.6 ms per subproblem
-  QAOA, XY mixer (simulated)      1321 kg CO2, closes  95.6 % of the gap, 9 subproblems,   1588.5 ms per subproblem
-  Full experiment, 100 buses, 2 nights, 3 passes: results/e8_summary.csv and README section 5.7.
-  (14.4 s; table: qollab_output/main_demo_e8_mini.csv)
-
-Full runs: experiments/e7_depot_year.py (the depot over a full year) and experiments/e8_hybrid_depot.py (QAOA inside the 100-bus depot); results in results/ and the README.
-Total runtime: 63.1 s
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+[4/5] The real-scale problem: a 100-bus depot (classical optimizer) 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+100 e-buses (modelled on public figures) need 34.7 MWh tonight, in 1-hour blocks: 812 yes/no decisions. 
+Too large for today's qubits, so a MILP solver plans it. 
+ 
+  Smallest grid connection that still charges every bus in time: 
+    unmanaged (charge on arrival)    6.90 MW  ██████████████████████████████████ 
+    first-come-first-served cap      5.40 MW  ███████████████████████████······· 
+    smart schedule                   3.31 MW  ████████████████·················· 
+ 
+  Tonight (2026-10-08): 
+                                               kg CO2      EUR  CO2 saved  EUR saved 
+    unmanaged (charge on arrival)              13,082    5,046       0.0%       0.0% 
+    first-come-first-served cap                12,321    4,879       5.8%       3.3% 
+    smart, carbon-first (6.9 MW)                6,448    3,117      50.7%      38.2% 
+    smart, cost-balanced (6.9 MW)               6,463    3,120      50.6%      38.2% 
+    (EUR = wholesale day-ahead energy; solved in 2.2 s, within 0.2 % of the optimum) 
+ 
+  The last 30 nights (2026-09-09 to 2026-10-08), carbon-first, same 6.9 MW connection: 
+    CO2      508.0 t unmanaged  ->     484.0 t smart   (4.7 % less) 
+    EUR    187,180   unmanaged  ->   169,883   smart   (9.2 % less) 
+    Full year (362 nights): 252 t CO2 and EUR 124,000 less (experiments/e7_depot_year.py). 
+    (30 nights solved in 8.0 s) 
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+[5/5] QAOA inside the depot optimizer (hybrid quantum-classical search) 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+A 16-bus depot on 0.90 MW. The search frees 2 buses at a time; QAOA (XY mixer, simulated) re-plans their 
+hours as one small QUBO and the new plan is kept if it lowers the depot's CO2. 
+ 
+  Start: first-come-first-served, 1,876 kg CO2.   Classical optimum (the yardstick): 1,296 kg CO2. 
+ 
+  Running the search with QAOA as the subsolver ... 
+     1/9  bus 2 + bus 11   16 qubits   depot CO2   1,746 kg   improved 
+     2/9  bus 3 + bus 10   16 qubits   depot CO2   1,650 kg   improved 
+     3/9  bus 0 + bus 4    16 qubits   depot CO2   1,511 kg   improved 
+     4/9  bus 7 + bus 5    11 qubits   depot CO2   1,484 kg   improved 
+     5/9  bus 14 + bus 12  13 qubits   depot CO2   1,451 kg   improved 
+     6/9  bus 6 + bus 9     9 qubits   depot CO2   1,407 kg   improved 
+     7/9  bus 13 + bus 1   14 qubits   depot CO2   1,370 kg   improved 
+     8/9  bus 8             6 qubits   depot CO2   1,340 kg   improved 
+     9/9  bus 15            6 qubits   depot CO2   1,321 kg   improved 
+ 
+  Result: QAOA as subsolver  1,321 kg CO2, 95.6 % of the way to the optimum 
+          exact enumeration  1,321 kg CO2, 95.6 % (the same subproblems solved classically) 
+  Full experiment, 100 buses and 3 passes: experiments/e8_hybrid_depot.py. 
+ 
+════════════════════════════════════════════════════════════════════════════════════════════ 
+ Done in 69 s. Tables and the figure are in qollab_output/. 
+ Full experiments: experiments/e7_depot_year.py (the depot over a year) and experiments/e8_hybrid_depot.py 
+ (QAOA inside the 100-bus depot); all results and figures are in the README. 
+════════════════════════════════════════════════════════════════════════════════════════════ 
