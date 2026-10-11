@@ -1,0 +1,21 @@
+Console output of `main.py` on Qollab with "IonQ Forte 1 (Quantum computer, 36 qubits)" selected in the
+Select QPU dialog: a run on real IonQ Forte 1 trapped-ion hardware, Sun Oct 11, 2026, run by the team.
+Copied verbatim from the Qollab console, except that 78 identical lines
+"Circuit predicted execution time: 165341ms" printed by the IonQ SDK while the job was pending are shown once.
+Everything above the "Selected backend" line is identical to results/qollab_run.txt (same seed, same
+simulator training) and is omitted here.
+
+Only the final sampling ran on the hardware: the XY-mixer QAOA circuit (p = 2, 16 qubits) with the angles
+trained on the simulator in the same run, one job, 1000 shots, IonQ's own compilation (183 two-qubit gates
+after transpiling for the backend). The "ideal simulator" row samples the same angles with the same number
+of shots on Qiskit's StatevectorSampler.
+
+Selected backend: ionq_qpu.forte-1. The trained XY circuit (p = 2, 16 qubits) runs there once with 1000 shots; the angles come from the simulator training above.
+Circuit predicted execution time: 165341ms   [printed 78 times while pending]
+Circuit execution time: 415046ms
+                         P(feasible)    P(<1%)   apx.exp
+  ideal simulator              0.697    0.0080    0.7044
+  ionq_qpu.forte-1             0.316    0.0040    0.6866
+  (803.5 s on ionq_qpu.forte-1; transpiled two-qubit gates: 183)
+
+Total runtime: 868.3 s

@@ -1,0 +1,9 @@
+# Qollab runtime (Pyodide). NumPy, SciPy, pandas and Matplotlib come with Pyodide and load on import,
+# so they are not listed here. Tested locally with Python 3.12, qiskit 2.5.2, numpy 2.5.3, scipy 1.18.1,
+# pandas 3.0.6, matplotlib 3.11.2. For a local install use requirements-local.txt.
+qiskit>=2.5.2,<3.0.0
+# Time-zone database for Europe/Amsterdam (Pyodide ships none; carbon_ev/data.py needs it):
+tzdata
+
+# Optional, only for the noisy part of experiments/e3_penalty_vs_xy.py (main.py does not need it):
+# qiskit_aer==0.17.2

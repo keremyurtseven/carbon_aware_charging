@@ -1,0 +1,62 @@
+Console output of `main.py` on Qollab (browser runtime, Pyodide), run by the team on Sun Oct 11, 2026.
+Copied verbatim from the Qollab console. Outputs were written to qollab_output/ in the browser.
+
+Loading packages…
+Loading project files…
+Compiling / initializing runtime…
+Running...
+Night 2026-10-08 20:00 -> next day 08:00, 3 EVs, 16 qubits, w = 0.7
+Block       20-22   22-00   00-02   02-04   04-06   06-08
+CO2 g/kWh     442     461     345     174     160     184
+EUR/MWh     215.7   176.2   113.7    83.4    84.3   129.4
+
+method                              kg CO2    EUR  schedule         feas  sav% vsMed% P(feas) apx.best apx.exp  P(opt)  P(<1%) depth   2q  time s
+-------------------------------------------------------------------------------------------------------------------------------------------------
+on-arrival                           38.14  15.01  A:0,1 B:2 C:1,2   yes   0.0  -44.5       -        -       -       -       -     -    -    0.00
+median feasible schedule             26.39  11.79  A:1,4 B:3 C:1,5   yes  30.8    0.0       -        -       -       -       -     -    -       -
+greedy                               15.74   8.71  A:3,5 B:4 C:3,4   yes  58.7   40.3       -        -       -       -       -     -    -    0.00
+SA (QUBO)                            15.69   8.72  A:4,5 B:3 C:3,4   yes  58.9   40.5       -        -       -       -       -     -    -    0.20
+exact (MILP)                         15.69   8.72  A:4,5 B:3 C:3,4   yes  58.9   40.5       -        -       -       -       -     -    -    0.03
+random sampling, 4096 shots          18.98   8.93  A:3,4 B:2 C:3,5   yes  50.2   28.1   0.007   0.8725  0.6419  0.0000  0.0000     -    -       -
+Dicke start only (p=0), 4096 shots   15.69   8.72  A:4,5 B:3 C:3,4   yes  58.9   40.5   0.670   1.0000  0.6359  0.0007  0.0024     -    -       -
+QAOA penalty-X (p=2)                 15.69   8.72  A:4,5 B:3 C:3,4   yes  58.9   40.5   0.523   1.0000  0.6467  0.0017  0.0039    79  160   24.07
+QAOA XY (p=2)                        15.69   8.72  A:4,5 B:3 C:3,4   yes  58.9   40.5   0.697   1.0000  0.7017  0.0020  0.0068   244  206    6.63
+
+sav% = CO2 saved vs on-arrival; vsMed% = CO2 saved vs the median feasible schedule (objective 89.22, 500 feasible schedules).
+On-arrival is the do-nothing baseline; tonight it ranks 500 of 500 feasible schedules (1 = best) (the last). vsMed% compares with a typical schedule.
+QAOA / sampling rows: apx.best = best feasible sample of 4096 shots, apx.exp = expected feasible cost; seed=0; exact objective = 56.8829.
+QAOA setup: both mixers at p=2 layers, CVaR training (alpha=0.25), ramp start, maxiter 1000; p chosen so the whole demo stays under ~45 s (use --reps to change).
+<exec>:246: MatplotlibDeprecationWarning: The width parameter as float was deprecated in Matplotlib 3.10 and will be removed in 3.12. Use int(width) instead.
+<exec>:246: MatplotlibDeprecationWarning: The height parameter as float was deprecated in Matplotlib 3.10 and will be removed in 3.12. Use int(height) instead.
+/project/qollab_output/main_demo.png
+/project/qollab_output/main_demo.png
+/project/qollab_output/main_demo.svg
+/project/qollab_output/main_demo.svg
+Figure alt text: `main_demo.png`: top, bar chart of carbon intensity per 2-hour block with the day-ahead price as a dashed line with markers; below, two EV-by-block grids (charge-on-arrival versus the optimal schedule) in which each EV has its own fill, hatch and marker (A blue circle, B orange crosshatched square, C green dotted triangle), white cells are available but idle and grey cells are not plugged in; the optimal schedule moves charging to the low-carbon blocks near the end of the night.
+Figure: qollab_output/main_demo.png (+ .svg); table: qollab_output/main_demo.csv
+
+Depot scale (classical MILP, 100-bus fleet modelled on public figures, 34.7 MWh this night)
+Grid connection needed:  unmanaged peak 6.90 MW | first-come-first-served cap 5.40 MW | smart schedule 3.31 MW
+(night 2026-10-08)                                  kg CO2       EUR  CO2 saved  EUR saved
+unmanaged (charge on arrival)                        13082      5046       0.0%       0.0%
+FCFS capped                                          12321      4879       5.8%       3.3%
+smart, carbon-first (w = 1), 6.90 MW                  6448      3117      50.7%      38.2%
+smart, cost-balanced (w = 0.7), 6.90 MW               6463      3120      50.6%      38.2%
+EUR = wholesale day-ahead energy; CO2 = average grid intensity. MILP proven gap 0.0020.
+(depot section: 2.1 s; table: qollab_output/main_demo_depot.csv)
+
+Depot over 30 nights (2026-09-09 to 2026-10-08), carbon-first (w = 1), same 6.90 MW connection (short version of experiments/e7_depot_year.py)
+  CO2:    508.0 t unmanaged ->   484.0 t smart  (4.7 % less)
+  EUR:    187,180 unmanaged ->   169,883 smart  (9.2 % less)
+  Full year, 362 nights: results/e7_summary.csv and README section 3.
+  (8.4 s; per-night table: qollab_output/main_demo_e7_month.csv)
+
+QAOA inside the depot optimizer: 16-bus depot, night 2026-10-08, 0.90 MW connection (short version of experiments/e8_hybrid_depot.py)
+  start (first-come-first-served) 1876 kg CO2, global optimum (MILP) 1296 kg CO2
+  exact enumeration               1321 kg CO2, closes  95.6 % of the gap, 9 subproblems,      0.6 ms per subproblem
+  QAOA, XY mixer (simulated)      1321 kg CO2, closes  95.6 % of the gap, 9 subproblems,   1588.5 ms per subproblem
+  Full experiment, 100 buses, 2 nights, 3 passes: results/e8_summary.csv and README section 5.7.
+  (14.4 s; table: qollab_output/main_demo_e8_mini.csv)
+
+Full runs: experiments/e7_depot_year.py (the depot over a full year) and experiments/e8_hybrid_depot.py (QAOA inside the 100-bus depot); results in results/ and the README.
+Total runtime: 63.1 s

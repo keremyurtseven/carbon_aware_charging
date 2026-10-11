@@ -1,0 +1,2 @@
+night,reps,shots,seed,total_runtime_s,depot_section_s,month_demo_s,hybrid_demo_s,qaoa_x_wall_s,qaoa_xy_wall_s,note
+2026-10-08,2,4096,0,51.16,1.488,3.8,12.93,24.21,6.109,wall-clock seconds on the machine that ran it; total includes plotting and the depot section

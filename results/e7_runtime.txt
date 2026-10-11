@@ -1,0 +1,4 @@
+total_runtime_s=167.9
+nights=362
+buses=100
+milp_depot=scipy.optimize.milp (HiGHS), mip_rel_gap 0.2 %, 4 solves per night

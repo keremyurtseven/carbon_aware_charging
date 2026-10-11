@@ -1,0 +1,5 @@
+circuit,source,backend,shots,feasible_prob,p_within_1pct,approx_ratio_expected,n_2q,file,feasible_prob_std_err
+"XY mixer, p = 2, 16 qubits, main night 2026-10-08, angles trained on the simulator","ideal simulator, same run (Qollab)",Qiskit StatevectorSampler,1000,0.697,0.008,0.7044,206,results/qollab_ionq_forte1_hardware.txt,0.0145324
+"XY mixer, p = 2, 16 qubits, main night 2026-10-08, angles trained on the simulator","ideal simulator, e3 median of 5 sampling replicates",Qiskit StatevectorSampler,4096,0.707031,0.00683594,0.703001,206,results/e3_summary.csv,0.00711132
+"XY mixer, p = 2, 16 qubits, main night 2026-10-08, angles trained on the simulator","approximate IonQ-like depolarizing model, e3 median of 3 replicates",qiskit-aer + carbon_ev/noise.py,4096,0.331543,0.00268555,0.68819,206,results/e3_summary.csv,0.00735575
+"XY mixer, p = 2, 16 qubits, main night 2026-10-08, angles trained on the simulator","IonQ Forte 1 quantum computer (real hardware, via Qollab)",ionq_qpu.forte-1,1000,0.316,0.004,0.6866,183,results/qollab_ionq_forte1_hardware.txt,0.0147018

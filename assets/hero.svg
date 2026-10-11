@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="1200" height="480" role="img" aria-labelledby="hero-title hero-desc">
+  <title id="hero-title">Carbon-aware charging for an electric bus depot</title>
+  <desc id="hero-desc">Night scene of an electric bus depot. Four buses charge at their chargers under a chart of the Dutch grid's carbon intensity on the night of 8 to 9 October 2026, which falls from about 470 to about 150 grams of CO2 per kilowatt-hour; the low-carbon hours after 02:00 are highlighted as the time to charge. On the left, the project title, three headline results from the classical optimizer (252 tonnes of CO2 and 124 thousand euro saved over 362 nights, and a 3.3 megawatt grid connection instead of 6.9) and a stylised QAOA quantum circuit with a constraint-preserving XY mixer.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a1330"/>
+      <stop offset="1" stop-color="#1c2c58"/>
+    </linearGradient>
+    <linearGradient id="co2fill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E69F00" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#E69F00" stop-opacity="0.04"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <g id="bus">
+      <rect x="0" y="0" width="112" height="46" rx="9" fill="#e8eef6"/>
+      <rect x="0" y="30" width="112" height="6" fill="#009E73"/>
+      <rect x="10" y="7" width="16" height="16" rx="2" fill="#2b3f6b"/>
+      <rect x="30" y="7" width="16" height="16" rx="2" fill="#2b3f6b"/>
+      <rect x="50" y="7" width="16" height="16" rx="2" fill="#2b3f6b"/>
+      <rect x="70" y="7" width="16" height="16" rx="2" fill="#2b3f6b"/>
+      <rect x="90" y="7" width="15" height="22" rx="2" fill="#3c5288"/>
+      <circle cx="24" cy="47" r="8.5" fill="#0b1226" stroke="#94a3b8" stroke-width="2.5"/>
+      <circle cx="88" cy="47" r="8.5" fill="#0b1226" stroke="#94a3b8" stroke-width="2.5"/>
+      <path d="M58 25 l-6 9 h5 l-3 8 l9 -11 h-5 l3 -6 z" fill="#22c55e"/>
+    </g>
+    <g id="charger">
+      <rect x="0" y="0" width="16" height="52" rx="3" fill="#334155" stroke="#64748b"/>
+      <rect x="3" y="6" width="10" height="7" rx="1.5" fill="#22c55e"/>
+    </g>
+  </defs>
+
+  <rect width="1200" height="480" fill="url(#sky)"/>
+  <g fill="#ffffff">
+    <circle cx="96" cy="26" r="1.2" opacity=".7"/><circle cx="210" cy="58" r="1" opacity=".5"/>
+    <circle cx="350" cy="22" r="1.3" opacity=".6"/><circle cx="470" cy="70" r="1" opacity=".4"/>
+    <circle cx="560" cy="30" r="1.2" opacity=".6"/><circle cx="700" cy="36" r="1" opacity=".5"/>
+    <circle cx="820" cy="20" r="1.4" opacity=".7"/><circle cx="960" cy="44" r="1" opacity=".5"/>
+    <circle cx="1080" cy="24" r="1.2" opacity=".6"/><circle cx="1160" cy="60" r="1" opacity=".4"/>
+    <circle cx="610" cy="96" r="1" opacity=".4"/><circle cx="300" cy="104" r="1" opacity=".35"/>
+  </g>
+  <circle cx="1146" cy="70" r="16" fill="#f1f5f9" opacity=".9"/>
+  <circle cx="1153" cy="64" r="14" fill="#16244b"/>
+
+  <!-- Title and headline results -->
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <text x="48" y="74" font-size="38" font-weight="700" fill="#f8fafc">Carbon-aware charging</text>
+    <text x="48" y="118" font-size="38" font-weight="700" fill="#f8fafc">for an electric bus depot</text>
+    <text x="48" y="152" font-size="16.5" fill="#cbd5e1">One year of real Dutch grid data · classical optimizer + QAOA in Qiskit</text>
+    <text x="48" y="175" font-size="16.5" fill="#cbd5e1">One trained circuit run on IonQ's Forte 1 quantum computer</text>
+
+    <g font-size="16" font-weight="700">
+      <rect x="48" y="196" width="156" height="44" rx="10" fill="#0f2a28" stroke="#009E73" stroke-width="1.5"/>
+      <text x="126" y="216" text-anchor="middle" fill="#6ee7b7">−252 t CO₂</text>
+      <text x="126" y="233" text-anchor="middle" font-size="12" font-weight="400" fill="#a7f3d0">per year</text>
+      <rect x="216" y="196" width="156" height="44" rx="10" fill="#0f2a28" stroke="#009E73" stroke-width="1.5"/>
+      <text x="294" y="216" text-anchor="middle" fill="#6ee7b7">−€124,000</text>
+      <text x="294" y="233" text-anchor="middle" font-size="12" font-weight="400" fill="#a7f3d0">energy cost per year</text>
+      <rect x="384" y="196" width="176" height="44" rx="10" fill="#0f2a28" stroke="#009E73" stroke-width="1.5"/>
+      <text x="472" y="216" text-anchor="middle" fill="#6ee7b7">3.3 MW grid</text>
+      <text x="472" y="233" text-anchor="middle" font-size="12" font-weight="400" fill="#a7f3d0">instead of 6.9 MW</text>
+    </g>
+    <text x="48" y="260" font-size="12.5" fill="#94a3b8">Classical optimizer · 100-bus depot modelled on public figures · 362 nights</text>
+  </g>
+
+  <!-- QAOA circuit motif -->
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="12.5" fill="#cbd5e1">
+    <text x="48" y="300">QAOA circuit · constraint-preserving XY mixer</text>
+  </g>
+  <g stroke="#7dd3fc" stroke-width="1.6" opacity=".9">
+    <line x1="60" y1="322" x2="548" y2="322"/>
+    <line x1="60" y1="350" x2="548" y2="350"/>
+    <line x1="60" y1="378" x2="548" y2="378"/>
+    <line x1="60" y1="406" x2="548" y2="406"/>
+  </g>
+  <g filter="url(#glow)">
+    <rect x="78" y="312" width="44" height="48" rx="6" fill="#1e3a8a" stroke="#93c5fd"/>
+    <rect x="78" y="368" width="44" height="48" rx="6" fill="#1e3a8a" stroke="#93c5fd"/>
+    <g stroke="#56B4E9" stroke-width="2.4" fill="#56B4E9">
+      <line x1="152" y1="322" x2="152" y2="378"/><circle cx="152" cy="322" r="4"/><circle cx="152" cy="378" r="4"/>
+      <line x1="176" y1="350" x2="176" y2="406"/><circle cx="176" cy="350" r="4"/><circle cx="176" cy="406" r="4"/>
+      <line x1="200" y1="322" x2="200" y2="406"/><circle cx="200" cy="322" r="4"/><circle cx="200" cy="406" r="4"/>
+    </g>
+    <rect x="226" y="314" width="30" height="44" rx="6" fill="#D55E00" opacity=".95"/>
+    <rect x="262" y="370" width="30" height="44" rx="6" fill="#D55E00" opacity=".95"/>
+    <rect x="298" y="342" width="30" height="44" rx="6" fill="#D55E00" opacity=".75"/>
+    <g stroke="#56B4E9" stroke-width="2.4" fill="#56B4E9">
+      <line x1="352" y1="322" x2="352" y2="378"/><circle cx="352" cy="322" r="4"/><circle cx="352" cy="378" r="4"/>
+      <line x1="376" y1="350" x2="376" y2="406"/><circle cx="376" cy="350" r="4"/><circle cx="376" cy="406" r="4"/>
+      <line x1="400" y1="322" x2="400" y2="406"/><circle cx="400" cy="322" r="4"/><circle cx="400" cy="406" r="4"/>
+    </g>
+    <rect x="426" y="314" width="30" height="44" rx="6" fill="#D55E00" opacity=".95"/>
+    <rect x="462" y="370" width="30" height="44" rx="6" fill="#D55E00" opacity=".95"/>
+    <g fill="#0f172a" stroke="#e2e8f0" stroke-width="1.4">
+      <rect x="512" y="312" width="28" height="20" rx="3"/><rect x="512" y="340" width="28" height="20" rx="3"/>
+      <rect x="512" y="368" width="28" height="20" rx="3"/><rect x="512" y="396" width="28" height="20" rx="3"/>
+    </g>
+  </g>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#e2e8f0" text-anchor="middle">
+    <text x="100" y="341">D(n,k)</text><text x="100" y="397">D(n,k)</text>
+    <text x="241" y="340">XY</text><text x="277" y="396">XY</text><text x="313" y="368">XY</text>
+    <text x="441" y="340">XY</text><text x="477" y="396">XY</text>
+  </g>
+  <g stroke="#e2e8f0" stroke-width="1.3" fill="none">
+    <path d="M517 328 a9 9 0 0 1 18 0"/><path d="M517 356 a9 9 0 0 1 18 0"/>
+    <path d="M517 384 a9 9 0 0 1 18 0"/><path d="M517 412 a9 9 0 0 1 18 0"/>
+  </g>
+
+  <!-- Carbon intensity of the night (hourly values, data/nl_grid_hourly.csv, 8-9 Oct 2026) -->
+  <rect x="898" y="70" width="248" height="182" fill="#22c55e" opacity=".12" rx="6"/>
+  <text x="1022" y="88" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="12.5" fill="#86efac">low-carbon hours: charge here</text>
+  <polygon fill="url(#co2fill)" points="650,106 695,103 740,100 785,93 830,120 875,171 920,211 965,227 1010,228 1055,221 1100,216 1145,212 1145,252 650,252"/>
+  <polyline fill="none" stroke="#E69F00" stroke-width="3" stroke-linejoin="round" points="650,106 695,103 740,100 785,93 830,120 875,171 920,211 965,227 1010,228 1055,221 1100,216 1145,212"/>
+  <g fill="#E69F00"><circle cx="785" cy="93" r="4.5"/><circle cx="1010" cy="228" r="4.5"/></g>
+  <line x1="640" y1="252" x2="1150" y2="252" stroke="#64748b" stroke-width="1"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">
+    <text x="650" y="270">20:00</text><text x="830" y="270">00:00</text><text x="1010" y="270">04:00</text><text x="1145" y="270">07:00</text>
+  </g>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="12.5" fill="#fcd34d">
+    <text x="785" y="82" text-anchor="middle">469 g CO₂/kWh</text>
+    <text x="1010" y="246" text-anchor="middle">151</text>
+  </g>
+  <text x="650" y="60" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13" fill="#cbd5e1">Dutch grid carbon intensity, night of 8–9 Oct 2026</text>
+
+  <!-- Depot -->
+  <polygon points="626,312 1182,312 1172,300 636,300" fill="#334155"/>
+  <g stroke="#475569" stroke-width="6">
+    <line x1="640" y1="312" x2="640" y2="440"/><line x1="1168" y1="312" x2="1168" y2="440"/>
+  </g>
+  <use href="#charger" x="650" y="372"/>
+  <use href="#bus" transform="translate(670 378) scale(0.93)"/>
+  <path d="M666 386 C 669 386, 669 393, 673 395" stroke="#22c55e" stroke-width="2.2" fill="none" opacity=".85"/>
+  <use href="#charger" x="776" y="372"/>
+  <use href="#bus" transform="translate(796 378) scale(0.93)"/>
+  <path d="M792 386 C 795 386, 795 393, 799 395" stroke="#22c55e" stroke-width="2.2" fill="none" opacity=".85"/>
+  <use href="#charger" x="902" y="372"/>
+  <use href="#bus" transform="translate(922 378) scale(0.93)"/>
+  <path d="M918 386 C 921 386, 921 393, 925 395" stroke="#22c55e" stroke-width="2.2" fill="none" opacity=".85"/>
+  <use href="#charger" x="1028" y="372"/>
+  <use href="#bus" transform="translate(1048 378) scale(0.93)"/>
+  <path d="M1044 386 C 1047 386, 1047 393, 1051 395" stroke="#22c55e" stroke-width="2.2" fill="none" opacity=".85"/>
+  <rect x="0" y="440" width="1200" height="40" fill="#0b1226"/>
+  <g stroke="#334155" stroke-width="3" stroke-dasharray="26 18"><line x1="0" y1="460" x2="1200" y2="460"/></g>
+</svg>

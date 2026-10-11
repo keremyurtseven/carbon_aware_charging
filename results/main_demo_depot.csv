@@ -1,0 +1,8 @@
+kind,method,connection_kw,night,w,n_buses,energy_mwh,co2_kg,cost_eur,co2_saved_pct,eur_saved_pct,mip_gap,peak_kw
+connection,unmanaged peak,6901.3,,,,,,,,,,
+connection,FCFS cap,5400,,,,,,,,,,
+connection,smart minimum,3312.3,,,,,,,,,,
+night,unmanaged (charge on arrival),6901.3,2026-10-08,,100,34.7336,13081.6,5045.85,0,0,,
+night,first-come-first-served cap,5400,2026-10-08,,100,34.7336,12320.6,4879.11,5.81698,3.30449,,
+night,"smart, carbon-first (6.9 MW)",6901.3,2026-10-08,1,100,34.7336,6451.66,3117.61,50.6813,38.2143,0.000789168,6900.9
+night,"smart, cost-balanced (6.9 MW)",6901.3,2026-10-08,0.7,100,34.7336,6462.61,3119.59,50.5975,38.1751,0.00199377,6890.6

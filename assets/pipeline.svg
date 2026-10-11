@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" width="1200" height="430" role="img" aria-labelledby="pipe-title pipe-desc">
+  <title id="pipe-title">How the project works</title>
+  <desc id="pipe-desc">Flow diagram. Top row, the classical pipeline: one year of Dutch grid data (hourly carbon intensity and day-ahead price) feeds a depot model of 100 e-buses with a grid-connection limit; a classical MILP optimizer schedules the whole depot and produces the yearly results in tonnes of CO2, euros and megawatts; these headline numbers come from the classical optimizer. Bottom row, the quantum subroutine: a hybrid search frees two buses at a time and turns their hours into a QUBO of at most 16 qubits, QAOA in Qiskit with a constraint-preserving XY mixer and Dicke start solves it, sampled on a statevector simulator (one trained circuit was also run on IonQ's Forte 1 quantum computer), and the best sample returns to the depot schedule if it improves it; the quality of this quantum-driven search is measured against the classical optimum.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="arrowq" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#D55E00"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="430" rx="16" fill="#f8fafc"/>
+
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <text x="30" y="34" font-size="13" font-weight="700" fill="#047857" letter-spacing=".5">CLASSICAL PIPELINE · THE WHOLE DEPOT</text>
+    <text x="30" y="246" font-size="13" font-weight="700" fill="#b45309" letter-spacing=".5">QUANTUM SUBROUTINE · ≤ 16 QUBITS</text>
+
+    <!-- Row 1 -->
+    <rect x="30" y="50" width="250" height="110" rx="12" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+    <text x="50" y="80" font-size="17" font-weight="700" fill="#0f172a">Grid data</text>
+    <text x="50" y="104" font-size="13.5" fill="#334155">Energy-Charts, Netherlands</text>
+    <text x="50" y="124" font-size="13.5" fill="#334155">hourly CO₂ + day-ahead price</text>
+    <text x="50" y="144" font-size="13.5" fill="#334155">Oct 2025 – Oct 2026</text>
+
+    <rect x="320" y="50" width="250" height="110" rx="12" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+    <text x="340" y="80" font-size="17" font-weight="700" fill="#0f172a">Depot model</text>
+    <text x="340" y="104" font-size="13.5" fill="#334155">100 e-buses, public figures</text>
+    <text x="340" y="124" font-size="13.5" fill="#334155">charging need per bus</text>
+    <text x="340" y="144" font-size="13.5" fill="#334155">grid-connection limit</text>
+
+    <rect x="610" y="50" width="250" height="110" rx="12" fill="#ecfdf5" stroke="#009E73" stroke-width="2"/>
+    <text x="630" y="80" font-size="17" font-weight="700" fill="#065f46">Classical optimizer</text>
+    <text x="630" y="104" font-size="13.5" fill="#334155">MILP schedules every bus</text>
+    <text x="630" y="124" font-size="13.5" fill="#334155">and every hour, all 362 nights</text>
+    <text x="630" y="144" font-size="13.5" fill="#334155">carbon-first objective</text>
+
+    <rect x="900" y="50" width="270" height="110" rx="12" fill="#009E73"/>
+    <text x="920" y="80" font-size="17" font-weight="700" fill="#ffffff">Yearly results</text>
+    <text x="920" y="104" font-size="13.5" fill="#ecfdf5">t CO₂ and € saved per year</text>
+    <text x="920" y="124" font-size="13.5" fill="#ecfdf5">grid connection needed (MW)</text>
+    <text x="920" y="144" font-size="13.5" fill="#ecfdf5">windy vs calm nights</text>
+
+    <!-- Row 2 -->
+    <rect x="320" y="262" width="250" height="120" rx="12" fill="#fff7ed" stroke="#D55E00" stroke-width="2"/>
+    <text x="340" y="292" font-size="17" font-weight="700" fill="#9a3412">Hybrid search</text>
+    <text x="340" y="316" font-size="13.5" fill="#334155">frees 2 buses at a time,</text>
+    <text x="340" y="336" font-size="13.5" fill="#334155">keeps the others fixed</text>
+    <text x="340" y="356" font-size="13.5" fill="#334155">→ QUBO with ≤ 16 qubits</text>
+
+    <rect x="610" y="262" width="250" height="120" rx="12" fill="#fff7ed" stroke="#D55E00" stroke-width="2"/>
+    <text x="630" y="292" font-size="17" font-weight="700" fill="#9a3412">QAOA in Qiskit</text>
+    <text x="630" y="316" font-size="13.5" fill="#334155">XY mixer + Dicke start keep</text>
+    <text x="630" y="336" font-size="13.5" fill="#334155">every bus's hours valid</text>
+    <text x="630" y="356" font-size="13.5" fill="#334155">CVaR-trained angles</text>
+
+    <rect x="900" y="262" width="270" height="120" rx="12" fill="#eff6ff" stroke="#0072B2" stroke-width="2"/>
+    <text x="920" y="292" font-size="17" font-weight="700" fill="#1e3a8a">Sampling</text>
+    <text x="920" y="316" font-size="13.5" fill="#334155">statevector simulator;</text>
+    <text x="920" y="336" font-size="13.5" fill="#334155">one trained circuit also ran on</text>
+    <text x="920" y="356" font-size="13.5" fill="#334155">IonQ Forte 1 hardware (Qollab)</text>
+
+    <text x="30" y="292" font-size="13.5" fill="#475569">The same objective and</text>
+    <text x="30" y="312" font-size="13.5" fill="#475569">constraints as the depot,</text>
+    <text x="30" y="332" font-size="13.5" fill="#475569">on a piece small enough</text>
+    <text x="30" y="352" font-size="13.5" fill="#475569">for today's qubits.</text>
+
+    <text x="735" y="414" font-size="12.5" fill="#9a3412" text-anchor="middle">best sample goes back into the depot schedule if it is better</text>
+  </g>
+
+  <!-- arrows -->
+  <g stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrow)">
+    <line x1="282" y1="105" x2="316" y2="105"/>
+    <line x1="572" y1="105" x2="606" y2="105"/>
+    <line x1="862" y1="105" x2="896" y2="105"/>
+    <path d="M445 162 L445 258"/>
+  </g>
+  <g stroke="#D55E00" stroke-width="2" fill="none" marker-end="url(#arrowq)">
+    <line x1="572" y1="322" x2="606" y2="322"/>
+    <line x1="862" y1="322" x2="896" y2="322"/>
+    <path d="M1035 384 C 1035 402, 445 402, 445 386" stroke-dasharray="6 5"/>
+  </g>
+  <g stroke="#009E73" stroke-width="2" fill="none" stroke-dasharray="5 5">
+    <path d="M735 260 L735 164" marker-end="url(#arrow)"/>
+  </g>
+  <text x="745" y="208" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="12.5" fill="#047857">quality measured against</text>
+  <text x="745" y="225" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="12.5" fill="#047857">the classical optimum</text>
+  <text x="745" y="242" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="12.5" fill="#047857">(the yardstick)</text>
+</svg>

@@ -1,0 +1,11 @@
+# Local (non-Qollab) install: pip install -r requirements-local.txt
+qiskit>=2.5.2,<3.0.0
+# Time-zone database for Europe/Amsterdam (Pyodide ships none; carbon_ev/data.py needs it):
+tzdata
+numpy
+scipy
+pandas
+matplotlib
+pytest
+# Optional: noisy simulation in experiments/e3_penalty_vs_xy.py
+qiskit-aer==0.17.2

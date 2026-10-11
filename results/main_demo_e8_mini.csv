@@ -1,0 +1,3 @@
+night,n_buses,connection_kw,subsolver,passes,co2_start_kg,co2_final_kg,co2_milp_kg,gap_closed_pct,n_subproblems,wall_s
+2026-10-08,16,900,exact,1,1876.29,1321.43,1295.83,95.5891,9,0.0028773
+2026-10-08,16,900,qaoa_xy,1,1876.29,1321.43,1295.83,95.5891,9,12.8276
